@@ -68,9 +68,9 @@ if __name__ == "__main__":
 
     json.dump(word_surprisal_tuples_list, open("word_surprisal_tuples_list.json", "w"), indent=4) # save the outputs
 
-    # finding the surprisal for the critical pronoun
+    # finding the surprisals for the critical pronouns
 
-    surprisals_at_critical_pronouns = []
+    surprisals_at_critical_pronouns = [] # list that will contain the surprisal values of only the critical pronoun of each sentnce 
 
     for word_surprisal_tuples in word_surprisal_tuples_list:
         surprisal_at_critical_pronoun = get_surprisal_at_critical_pronoun(word_surprisal_tuples)
@@ -85,7 +85,8 @@ if __name__ == "__main__":
     for i, surprisal_at_critical_pronoun in enumerate(surprisals_at_critical_pronouns):
         surprisals_at_critical_pronouns_by_conditions[i%4].append(surprisal_at_critical_pronoun) # appends item with index n % 4 == x to surprisals_at_critical_pronouns_by_conditions[x]
 
-    average_surprisals_at_critical_pronouns_by_conditions = []
+    average_surprisals_at_critical_pronouns_by_conditions = [] # list that will contain the 4 averages (by condition) of the surprisals at the critical prnoun
+
     for surprisals_at_critical_pronouns_by_condition in surprisals_at_critical_pronouns_by_conditions:
         average_surprisals_at_critical_pronouns_by_condition = np.mean(surprisals_at_critical_pronouns_by_condition)
         average_surprisals_at_critical_pronouns_by_conditions.append(average_surprisals_at_critical_pronouns_by_condition)
