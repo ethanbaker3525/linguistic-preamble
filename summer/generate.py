@@ -60,8 +60,10 @@ if __name__ == "__main__":
     word_surprisal_tuples_list = [] # list of all the token_surprisal_tuples generated
 
     for sentence in sentences:
+        sentence = sentence.strip().strip(".") # remove trailing whitespace and period from sentence if it has one
         token_surprisal_tuples = model.token_score(sentence, surprisal=True, base_two=True)[0] # token_score() outputs a length 1 list with a list of tuples, each containing the token and the surprisal at that token
         # -> [(tok0, 0.0), (tok1, 1.0), ...]
+        # Worth noting that some words are split into tokens oddly, such as [('L', 0.0), ('ily', 13.184611320495605), ('Ġwondered', 12....
         word_surprisal_tuples = align_surprisal(token_surprisal_tuples, sentence) # groups multiple tokens comprising a single word by summing their surprisals
         # -> [(word0, 0.0), (word1, 1.0), ...]
         word_surprisal_tuples_list.append(word_surprisal_tuples)
